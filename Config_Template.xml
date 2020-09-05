@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<configuration>
+  <Update>
+    <Enabled>False</Enabled>
+    <Version>1.0</Version>
+  </Update>
+  <export>
+    <Client></Client>
+    <Customer></Customer>
+  </export>
+  <Settings>
+    <CA>
+      <Enabled></Enabled>
+      <Servers></Servers>
+    </CA>
+    <SMTPRelay>
+      <Enabled></Enabled>
+      <Servers></Servers>
+    </SMTPRelay>
+    <AD>
+      <Enabled></Enabled>
+        <GPO>
+          <Enabled></Enabled>
+        </GPO>
+    </AD>
+ 	  <SCCM>
+      <Enabled></Enabled>
+      <Modulepath></Modulepath>
+    </SCCM>
+    <Nmap>
+	    <Enabled></Enabled>
+	    <IPRange></IPRange>
+    </Nmap>
+  </Settings>
+</configuration>
