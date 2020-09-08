@@ -10,11 +10,18 @@ $xml.Load($Path)
 # ============================
 # Connect to SQL and run QUERY 
 # ============================
+
+#Generate the Encrypted Password
+#$credential = Get-Credential
+#$credential.Password | ConvertFrom-SecureString | Set-Content c:\script\encrypted_password.txt
+$EncryptedPassword = $xml.configuration.Settings.SCCM.Password
+$UserName = $xml.configuration.Settings.SCCM.Username
+$Credentials = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, ($EncryptedPassword | ConvertTo-SecureString)
 $client = $xml.configuration.export.client
-$SQLServer = "" #$xml.configuration.Settings.SCCM.SQLServer
-$SQLDBName = "" #$xml.configuration.Settings.SCCM.SQLDBName
-$SQLUsername = "" #$xml.configuration.Settings.SCCM.SQLUsername
-$SQLPassword = ""  #$xml.configuration.Settings.SCCM.SQLServer
+$SQLServer = $xml.configuration.Settings.SCCM.Server
+$SQLDBName = $xml.configuration.Settings.SCCM.Database
+$SQLUsername = $credentials.UserName
+$SQLPassword = $Credentials.GetNetworkCredential().password
 $OutputPath = "C:\Script\Reporting\Export\" + $client + "SCCM"
 
 # ==========================

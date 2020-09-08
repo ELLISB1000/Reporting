@@ -176,6 +176,13 @@ If ($xml.configuration.Settings.SCCM.Enabled -eq "True")
     Start-Job -Name "ReportingSCCM" -ScriptBlock {Invoke-Expression -Command "C:\Script\Reporting\Functions\SCCM.ps1"}
 }
 
+# Run Nmap Script
+If ($xml.configuration.Settings.Nmap.Enabled -eq "True")
+{
+    Write-Verbose "Starting Job ReportingNmap"
+    Start-Job -Name "ReportingNmap" -ScriptBlock {Invoke-Expression -Command "C:\Script\Reporting\Functions\NMAP.ps1"}
+}
+
 # =======================
 # Check Jobs
 # =======================

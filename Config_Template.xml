@@ -2,7 +2,7 @@
 <configuration>
   <Update>
     <Enabled>False</Enabled>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
   </Update>
   <export>
     <Client></Client>
@@ -25,7 +25,10 @@
     </AD>
  	  <SCCM>
       <Enabled></Enabled>
-      <Modulepath></Modulepath>
+      <Server></Server>
+      <Database></Database>
+      <Username></Username>
+      <Password></Password>
     </SCCM>
     <Nmap>
 	    <Enabled></Enabled>

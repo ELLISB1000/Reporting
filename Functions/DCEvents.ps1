@@ -36,7 +36,7 @@ If ($xml.configuration.Settings.AD.Enabled -eq "True")
     $dcs = Get-ADDomainController -Filter {Name -like "*"}
     foreach($dc in $dcs)
     {
-        $lockedoutEvents = Get-WinEvent -ComputerName $DC.IPv4Address -FilterHashtable @{LogName='Security';Id=4724,4740,4725,4722,4776,4771;StartTime=[datetime]::Today.AddDays(-3);EndTime=$(Get-Date)} -ErrorAction SilentlyContinue
+        $lockedoutEvents = Get-WinEvent -ComputerName $DC.IPv4Address -FilterHashtable @{LogName='Security';Id=4724,4740,4725,4722,4771;StartTime=[datetime]::Today.AddDays(-2);EndTime=$(Get-Date)} -ErrorAction SilentlyContinue
     
         Foreach($Event in $LockedOutEvents)
         {
@@ -82,18 +82,6 @@ If ($xml.configuration.Settings.AD.Enabled -eq "True")
                 'Client' = $client
                 'User' = $event.Properties[4].Value
                 'Target' = $event.Properties[0].Value
-                'DomainController' = $event.MachineName
-                'EventId' = $event.Id
-                'EventTimestamp' = $event.TimeCreated
-                'Message' = $event.Message -split "`r" | Select-Object -First 1
-                }
-            }
-            elseif($event.id -eq "4776")
-            {
-                $obj = [PSCustomObject]@{
-                'Client' = $client
-                'User' = $event.Properties[1].Value
-                'Target' = $event.Properties[2].Value
                 'DomainController' = $event.MachineName
                 'EventId' = $event.Id
                 'EventTimestamp' = $event.TimeCreated

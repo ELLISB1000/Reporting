@@ -198,6 +198,8 @@ If ($xml.configuration.Settings.AD.Enabled -eq "True")
                     'Group Modified' = $group.Modified
                     'Member Name' = "None"
                     'Member Username' = "None"
+                    'Member Last Logon' = "None"
+                    'Member Enabled' = "None"
                     'Parent Container' = $group.CanonicalName -replace "/$($group.cn)",""
                     }
                 $GroupTable.add($obj)
@@ -216,6 +218,8 @@ If ($xml.configuration.Settings.AD.Enabled -eq "True")
                     'Group Modified' = $group.Modified
                     'Member Name' = $member.name
                     'Member Username' = $member.SamAccountName
+                    'Member Last Logon' = ($theusers | Where-Object {$_.username -eq $member.SamaccountName}).LastLogonTime
+                    'Member Enabled' = ($theusers | Where-Object {$_.username -eq $member.SamaccountName}).Enabled
                     'Parent Container' = $group.CanonicalName -replace "/$($group.cn)",""
                     }
                 $GroupTable.add($obj)
